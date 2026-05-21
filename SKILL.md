@@ -1,6 +1,6 @@
 ---
 name: commit-flow
-description: Commit workflow conventions: changeset creation, Conventional Commits formatting, and Co-Authored-By signing. Applies when creating commits, writing commit messages, making changes that should be tracked, or running releases.
+description: "Commit workflow conventions: changeset creation, Conventional Commits formatting, and Co-Authored-By signing. Applies when creating commits, writing commit messages, making changes that should be tracked, or running releases."
 metadata:
   version: "1.0"
 ---
