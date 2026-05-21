@@ -6,7 +6,7 @@ AI-assisted commit workflow conventions for consistent, traceable commits.
 
 1. **Changeset creation** — Write `.changeset/*.md` files directly (no interactive CLI). Supports single package and monorepo
 2. **Conventional Commits** — `type(scope): description` format with paragraph or bullet list body
-3. **Co-Authored-By signature** — Dynamically reads model name from `ANTHROPIC_MODEL` / `CLAUDE_MODEL` / `MODEL_NAME` env vars
+3. **Co-Authored-By signature** — Always reads model name from shell via `echo` before drafting the message (never guesses). Falls through `ANTHROPIC_MODEL` → `CLAUDE_MODEL` → `MODEL_NAME`
 4. **Commit granularity** — Split by change nature, not file count
 5. **Pre-commit checklist** — `git status` → security scan → `git diff` → `git log` → draft message → user confirmation
 6. **Branch decisions** — When to create a new branch vs commit on current branch

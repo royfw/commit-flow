@@ -78,12 +78,20 @@ Use Conventional Commits format: `type(scope): description`
 
 Every git commit MUST include a `Co-Authored-By` trailer line.
 
-**Model name resolution** (use first non-empty value):
+**Model name resolution** — BEFORE presenting the commit summary, run a shell command to check the actual values:
+
+```bash
+echo "ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-<empty>}"
+echo "CLAUDE_MODEL=${CLAUDE_MODEL:-<empty>}"
+echo "MODEL_NAME=${MODEL_NAME:-<empty>}"
+```
+
+Use the first non-empty value from:
 1. `ANTHROPIC_MODEL` env var
 2. `CLAUDE_MODEL` env var
 3. `MODEL_NAME` env var
 
-If none are available, omit the trailer.
+If none are available, omit the trailer. Do NOT guess or assume the values — always read them from the shell.
 
 **Format:**
 
@@ -182,8 +190,9 @@ Before committing, review in this order:
 2. **Security check** — scan for `.env`, `*.key`, `*.pem`, `credentials.json`, `id_rsa`, secrets files. Exclude if found.
 3. **`git diff`** (unstaged) + **`git diff --cached`** (staged) — verify changes are correct
 4. **`git log --oneline -5`** — check recent commit message style for consistency
-5. **Draft the commit message** based on what you observed, present to user for confirmation
-6. **User confirms** → stage specific files → commit
+5. **Check model env vars** — run `echo "ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-<empty>}"` etc. to resolve Co-Authored-By name. Do NOT guess.
+6. **Draft the commit message** based on what you observed, present to user for confirmation
+7. **User confirms** → stage specific files → commit
 
 Present a summary before committing:
 
